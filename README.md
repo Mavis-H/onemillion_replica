@@ -1,5 +1,6 @@
 # CSE330
 
+## Approved by David Buckley
 ## Siqian Hou
 ## 502936
 ## Mavis-H
@@ -16,7 +17,7 @@ Link: http://www.milliondollarhomepage.com/
 
 #### Functionality (70 points)
 - 10: Users can register, login, and logout
-- 15: Logged in users can buy/sell a square area on the webpage.
+- 5: Logged in users can buy/sell a square area on the webpage.
 - 15: Users trasaction will be verified through Bitcoin transaction.
 - 15: Logged in users can set/edit the color and the brief description of their own areas. 
 - 5： Any user can check the description of squares. 
@@ -25,3 +26,5 @@ Link: http://www.milliondollarhomepage.com/
 #### Best Practices (5 points)
 - Code is readable and well formatted
 - All pages pass the html validator
+
+#### Creative Portion (10 points)
