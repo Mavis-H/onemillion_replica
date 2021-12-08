@@ -1,0 +1,33 @@
+body {
+   background: #f4f1e5;
+   color: #544738;
+   font-family: helvetica, sans-serif;
+}
+
+ul.nav li.left {
+ float: left;
+ list-style: none;
+ margin-right: 1em;
+}
+
+ul.nav li.right {
+ float: right;
+ list-style: none;
+ margin-right: 1em;
+}
+
+li a{
+ color: #544738;
+ text-decoration: none;
+ float: left;
+ font-size: 25px;
+ padding: 12px;
+}
+
+a:hover {
+    color: #7eb9be;
+    -webkit-transform: rotate(-10deg) scale(1.2);
+    -moz-transform: rotate(-10deg) scale(1.2);
+    -o-transform: rotate(-10deg) scale(1.2);
+}
+

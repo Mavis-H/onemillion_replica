@@ -1,0 +1,15 @@
+
+USER_NAME_LENGTH_LIMIT = 20
+PASSWORD_LENGTH_LIMIT = 30
+TOKEN_ADDRESS = '0x6E682420f84f06E2a4B69e162718225E3eE2aAEA'
+
+TOKEN_DECIMAL = 18
+TRANSFER_TOPIC = '0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef'
+ENDPOINT = 'https://eth-goerli.alchemyapi.io/v2/60CgSsmWg5EBpTPG9b5XYc1_-YU-uPDJ'
+
+WIDTH = 1000
+HEIGHT = 1000
+
+# address for bsc mainnet
+# TOKEN_ADDRESS = '0x2e7472f8f3060df85302b535bcd84c6e0ffc8a7c'
+# 'https://sparkling-purple-forest.bsc.quiknode.pro/13a169e12450d00d2799491cd98a761b256381fe/
