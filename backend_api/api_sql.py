@@ -106,7 +106,7 @@ def anon_user():
 class Pixel(db.Model):
     position = db.Column(db.Integer, primary_key=True, index=False, autoincrement=False)
     rgb = db.Column(db.String, unique=False, nullable=True)
-    user = db.Column(db.String, unique=True, nullable=True)
+    user = db.Column(db.String, unique=False, nullable=True)
     description = db.Column(db.String, unique=False, nullable=True)
 
     def to_base64(self) -> str:
@@ -233,6 +233,9 @@ def db_set_user(user_name: str, password: str, money: int = 0, pixels=None) -> b
     logger.info(f'user created {user_name} {money} {pixels} {password}')
     return True
 
+
+db.create_all()
+db.session.commit()
 
 if __name__ == '__main__':
     # print(int_to_base64(255*255*255))

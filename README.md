@@ -39,9 +39,9 @@ __Basic Concept and Process Related to Cryptocurrency & Blockchain__
 #### Set up:
 - MHP: self create cryptocurrency
 	- total tokens: 1000,000
-	- contract address:
-	- test account 1 address:
-	- test account 2 address:
+	- token address: 0x6E682420f84f06E2a4B69e162718225E3eE2aAEA
+	- test account 1 (mavis) address: 0x3CC637174D6362318fD24a6ae2F15462A58d4183
+	- test account 2 (dandy) address: 0xA18E8f4d792Cde9B14E32593D1077Bc3237c6CE6
 - On Görli Testnet & Binance Smart Chain(BSC)
 	- Using faucet on Görli Testnet (for test)
 	- Real money
@@ -61,4 +61,8 @@ __Basic Concept and Process Related to Cryptocurrency & Blockchain__
 
 - backend check transaction on chain blocks from fullnode(lightnode, archivenode)
 
-
+#### Other Settings:
+- utility.py: 
+	- is_dev = True: activate log; False: deactivate
+- consts.py: important value
+- test.py: insert large amount of test records

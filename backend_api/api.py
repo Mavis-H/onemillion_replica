@@ -14,6 +14,9 @@ from flask_login import LoginManager, login_required, logout_user, login_user, c
 from . import app
 from .utility import rgb_to_base64, CacheCleaner, validate_txn, verbose_logger
 
+
+
+
 load_dotenv('.flaskenv')
 login_manager = LoginManager()
 
