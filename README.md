@@ -10,10 +10,10 @@ Link: http://www.milliondollarhomepage.com/
 
 #### Rubric turned in on time (5 points)
 
-#### Languages/Frameworks used (20 points) => (25 points)
+#### Languages/Frameworks used (20 points)
 - 10: Learned/Used React.js frontend
 - 10: Learned/Used Flask backend
-- 0: MySQL Database => 5: PostgreSQL Database
+- 0: MySQL Database => PostgreSQL Database
 
 #### Functionality (60 points)
 - 10: Users can register, login, and logout
@@ -27,7 +27,7 @@ Link: http://www.milliondollarhomepage.com/
 - Code is readable and well formatted
 - All pages pass the html validator
 
-#### Creative Portion (10 points) => (5 points)
+#### Creative Portion (10 points)
 - User can also check detail square and surrounding suqares pattern on click
 - Data encoding & decoding, reduce bandwidth
 	- only transfer pixels owned by user, others set to default 
