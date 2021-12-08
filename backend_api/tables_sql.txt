@@ -1,0 +1,20 @@
+Table user:
+    username = db.Column(db.String(consts.USER_NAME_LENGTH_LIMIT), unique=True, nullable=False, primary_key=True)
+    password_hash = db.Column(db.String(128), unique=False, nullable=False)
+    money = db.Column(db.Integer, unique=False, nullable=False, default=0)
+    pixels = db.Column(db.ARRAY(db.Integer), unique=False, nullable=False, default=[])
+
+
+Table pixel:
+    position = db.Column(db.Integer, primary_key=True, index=False, autoincrement=False)
+    rgb = db.Column(db.String, unique=False, nullable=True)
+    user = db.Column(db.String, unique=False, nullable=True)
+    description = db.Column(db.String, unique=False, nullable=True)
+
+
+Table pixel_listing:
+    position = db.Column(db.Integer, primary_key=True, index=False, autoincrement=False)
+    amount = db.Column(db.Integer, unique=False, nullable=False)
+    seller = db.Column(db.String, unique=False, nullable=False)
+    address = db.Column(db.String, unique=False, nullable=False)
+

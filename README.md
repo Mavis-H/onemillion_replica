@@ -66,3 +66,4 @@ __Basic Concept and Process Related to Cryptocurrency & Blockchain__
 	- is_dev = True: activate log; False: deactivate
 - consts.py: important value
 - test.py: insert large amount of test records
+- PTB is stored in cache because the state only last at most 15mins(time limit can be modified). PTB will be refreshed if server down (we assume the server will keep running).
