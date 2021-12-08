@@ -15,7 +15,7 @@ Link: http://www.milliondollarhomepage.com/
 - 10: Learned/Used Flask backend
 - 0: MySQL Database => 5: PostgreSQL Database
 
-#### Functionality (70 points)
+#### Functionality (60 points)
 - 10: Users can register, login, and logout
 - 5: Logged in users can buy/sell a square area on the webpage.
 - 15: Users trasaction will be verified through Bitcoin transaction.
