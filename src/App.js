@@ -10,7 +10,12 @@ import Marketplace from "./Marketplace";
 const [board_width, board_height] = [1000, 1000]
 
 function chunkString(str, length) {
-    return str.match(new RegExp('.{1,' + length + '}', 'g'));
+    if (str) {
+        return str.match(new RegExp('.{1,' + length + '}', 'g'));
+    }
+    else {
+        return [];
+    }
 }
 
 const byteArrayToLong = function(/*byte[]*/byteArray) {
