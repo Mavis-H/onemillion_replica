@@ -103,6 +103,7 @@ function generate_image(path, pixels){
 }
 
 function App() {
+  window.localStorage.clear()
 
   const [currentMatrix, setCurrentMatrix] = useState('');
   const [currentPixels, setCurrentPixels] = useState([])

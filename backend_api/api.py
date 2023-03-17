@@ -230,14 +230,17 @@ def login():
     if not form.validate():
         return {'error': f'user login failed {form.errors}'}
     user: User = load_user(form.data['username'])
-    if user and user.verify_password(form.data['password']):
-        res = login_user(user=user, force=True)
-        if res:
-            return {'success': f'user {form.data["username"]} logged in'}
-        else:
-            return {'error': f'user login failed'}
+    if isinstance(user, User):
+        if user.verify_password(form.data['password']):
+            res = login_user(user=user, force=True)
+            if res:
+                return {'success': f'user {form.data["username"]} logged in'}
+            else:
+                return {'error': f'user login failed'}
+        else: 
+            return {'error': f'wrong password'}
     else:
-        return {'error': f'user login failed'}
+        return {'error': f'user does not exist'}
 
 
 @app.route('/signup', methods=['POST'])
@@ -253,7 +256,7 @@ def set_user():
             return {'success': f'user {form.data["username"]} created'}
         return {'error': 'user signup failed'}
     else:
-        return {'error': 'user exists'}
+        return {'error': 'user already exists'}
 
 
 @app.route('/set_pixel', methods=['POST'])

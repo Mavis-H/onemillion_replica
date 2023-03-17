@@ -1,7 +1,7 @@
-import React, {useEffect, useRef, useState} from "react";
+import React, {useEffect, useState} from "react";
 import APIService from "./APIService";
 import Popup from "./Popup";
-import "./Marketplace.css"
+import "./Marketplace.css";
 import Form from "./Form";
 
 const Marketplace = (props) => {
