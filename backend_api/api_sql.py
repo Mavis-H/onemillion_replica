@@ -180,6 +180,15 @@ def db_transfer_pixel(pre_owner: str, new_owner: str, position: int) -> bool:
         return True
     else:
         return False
+    
+
+@error_handle('buy_pixel', False)
+def db_buy_pixel(new_owner: str, position: int) -> bool:
+    db.session.add(Pixel(user=new_owner, position=position, rgb='AAAA', description=''))
+    db.session.commit()
+    logger.info(f'{new_owner} bought pixel from website at {position}')
+    return True
+
 
 @error_handle('set_pixel', False)
 def db_set_pixel(username: str, position: int, rgb: str, description: str) -> bool:

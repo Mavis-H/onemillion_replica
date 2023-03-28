@@ -103,7 +103,6 @@ function generate_image(path, pixels){
 }
 
 function App() {
-  window.localStorage.clear()
 
   const [currentMatrix, setCurrentMatrix] = useState('');
   const [currentPixels, setCurrentPixels] = useState([])
@@ -177,7 +176,7 @@ function App() {
         <Routes>
           <Route path="/" element={
             <div className="board">
-              <Board img={currentMatrix} pixels={currentPixels}/>
+              <Board img={currentMatrix} pixels={currentPixels} logStatus={logStatus}/>
             </div>
           }/>
           <Route path="/marketplace" element={

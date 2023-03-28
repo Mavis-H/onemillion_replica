@@ -61,7 +61,7 @@ const Board = (props) => {
           console.log(response)
           setCurrentInfo([response['user'], response['description']])
         } else if (response.hasOwnProperty('error') && response['error'] === `pixel ${position} not owned by anyone`){
-          setCurrentInfo(['',''])
+          setCurrentInfo(['N/A','Waiting for someone to buy it.'])
         }
       })
       .catch(error => console.log('error', error))
@@ -83,6 +83,7 @@ const Board = (props) => {
                 pos={(currentCursor.y)*1000 + (currentCursor.x)}
                 detailPixels={getDetailPixels()}
                 info={currentInfo}
+                logStatus={props.logStatus}
               />
             </>}
             handleClose={togglePopup}

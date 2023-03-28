@@ -57,7 +57,9 @@ class CacheCleaner:
             cleaning_ptb = []
             for position, pending_txn in self.cache['pending_transaction_book'].items():
                 if pending_txn[4] + self.TRANSACTION_TIME_LIMIT < time.time():
-                    self.cache['pixels_listing'][position] = (pending_txn[0], pending_txn[3], pending_txn[1])
+                    # Don't need to return website owned pixel back to the marketplace
+                    if pending_txn[3] != 'N/A':
+                        self.cache['pixels_listing'][position] = (pending_txn[0], pending_txn[3], pending_txn[1])
                     cleaning_ptb.append(position)
             for p in cleaning_ptb:
                 logger.info(f'cleaning ptb {p}')

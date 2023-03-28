@@ -9,10 +9,11 @@ from dotenv import load_dotenv
 from .log import logger
 from .api_sql import db_get_user, db_exists_user, db_set_user, db_get_all_pixel, User, anon_user, db_user_have_pixel, \
     db_set_pixel, AnonymousUser, db_transfer_pixel, Pixel, db_get_all_pixel_listing, db_set_pixel_listing, \
-    db_delete_pixel_listing
+    db_delete_pixel_listing, db_buy_pixel
 from flask_login import LoginManager, login_required, logout_user, login_user, current_user
 from . import app
 from .utility import rgb_to_base64, CacheCleaner, validate_txn, verbose_logger
+from .consts import WEBSITE_WALLET_ADDRESS
 
 
 
@@ -106,10 +107,16 @@ def confirm_purchase():
         del cache['pending_transaction_book'][position]
         pre_owner = ptb_entry[3]
         new_owner = current_user.username
-        res = db_transfer_pixel(pre_owner=pre_owner, new_owner=new_owner, position=position)
-        if res:
-            cache['matrix'][position].user = new_owner
-            return {'success': f'purchase at {position} confirmed'}
+        if pre_owner == 'N/A':
+            res = db_buy_pixel(new_owner=new_owner, position=position)
+            if res:
+                cache['matrix'][position] = Pixel(user=new_owner, position=position, rgb='AAAA', description='')
+                return {'success': f'purchase at {position} from website confirmed'}
+        else:
+            res = db_transfer_pixel(pre_owner=pre_owner, new_owner=new_owner, position=position)
+            if res:
+                cache['matrix'][position].user = new_owner
+                return {'success': f'purchase at {position} from {pre_owner} confirmed'}
     return {'error': f'purchased pixel at {position} failed'}
 
 
@@ -151,23 +158,30 @@ def request_purchase():
         return {'error': f'{form.errors}'}
     # check for if purchase of interest is in listing_pixels
     position = form.data['position']
-    if position not in cache['pixels_listing']:
+    isowned = 'error' not in get_pixel_detail(position)
+    # pixel owned by website can also be purchased
+    if position not in cache['pixels_listing'] and isowned:
         return {'error': f'pixel at {position} is not selling'}
-    if cache['pixels_listing'][position][1] == current_user.username:
+    if isowned and (cache['pixels_listing'][position][1] == current_user.username):
         return {'error': f'cannot purchase own property at {position}'}
     if position not in cache['pending_transaction_book']:
-        amount = cache['pixels_listing'][position][0]
-        seller_address = cache['pixels_listing'][position][2]
-        seller_username = cache['pixels_listing'][position][1]
         buyer_username = current_user.username
+        if isowned:
+            amount = cache['pixels_listing'][position][0]
+            seller_address = cache['pixels_listing'][position][2]
+            seller_username = cache['pixels_listing'][position][1]
+        else:
+            amount = 1
+            seller_address = WEBSITE_WALLET_ADDRESS
+            seller_username = 'N/A'
         cache['pending_transaction_book'][position] = (
             amount, seller_address, buyer_username, seller_username, timestamp)
-        response = {'success': {'wallet': cache['pixels_listing'][position][2],
-                                'amount': cache['pixels_listing'][position][0],
-                                'seller': cache['pixels_listing'][position][1]}}
-        if db_delete_pixel_listing(position, seller_username):
+        response = {'success': {'wallet': seller_address,
+                                'amount': amount,
+                                'seller': seller_username}}
+        if isowned and db_delete_pixel_listing(position, seller_username):
             del cache['pixels_listing'][position]
-            return response
+        return response
     return {'error': f'pixel at {position} is not selling'}
 
 
