@@ -1,5 +1,3 @@
-
-# data:12/5/21
 import base64
 import time
 import zlib

@@ -1,5 +1,3 @@
-
-# data:12/4/21
 import logging
 
 import colorlog

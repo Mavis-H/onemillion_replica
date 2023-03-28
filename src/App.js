@@ -6,6 +6,7 @@ import Board from "./Board";
 import APIService from "./APIService";
 import Manage from "./Manage";
 import Marketplace from "./Marketplace";
+import {unicode_to_bytes} from "./Utility"
 
 const [board_width, board_height] = [1000, 1000]
 
@@ -26,16 +27,6 @@ const byteArrayToLong = function(/*byte[]*/byteArray) {
     return value;
 };
 
-
-function unicode_to_bytes(str){
-    var bytes = []; // char codes
-    for (var i = 0; i < str.length; ++i) {
-        var code = str.charCodeAt(i);
-        bytes = bytes.concat([code]);
-    }
-    return bytes
-}
-
 function decode_pixel(pixel){
 //    This function takes in a pixel in format of
 //    [0:4) as position in int and [4:] as rgb
@@ -45,10 +36,6 @@ function decode_pixel(pixel){
     position = byteArrayToLong(unicode_to_bytes(position))
     const [r, g, b] = unicode_to_bytes(rgb)
     return [position, r, g, b]
-}
-
-function decode_rgb(rgb){
-  return unicode_to_bytes(atob(rgb))
 }
 
 function decode_matrix(matrix){

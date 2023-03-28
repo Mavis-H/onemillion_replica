@@ -1,5 +1,3 @@
-
-# data:12/5/21
 import logging
 
 from wtforms import Form, BooleanField, StringField, PasswordField, validators, ValidationError, IntegerField
