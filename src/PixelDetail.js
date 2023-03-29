@@ -14,20 +14,17 @@ const PixelDetail = (props) => {
   const [stopTime, setStopTime] = useState(900);
   // Control current confirm pixel
   const [currentPixel, setCurrentPixel] = useState(0);
-  // Control alert status of the purchasing
-  const [isTimeEnd, setIsTimeEnd] = useState(false);
 
   const toggleExpansion = (event) => {
     console.log('c:',isConfirm)
     console.log('o',isExpanded)
     console.log(props.logStatus)
-    if (isExpanded && isConfirm) {
-      alert("You will lose all the change you made if you close the popup.");
-    }
     setIsExpanded(!isExpanded);
     setIsConfirm(false);
+    props.changeConfirmStatus(false)
     setStopTime(900);
     setCurrentPixel(event.target.id)
+    props.setCurrentPos(event.target.id)
   }
 
   const toggleConfirm = () => {
@@ -35,6 +32,7 @@ const PixelDetail = (props) => {
       .then((response) => {
         if (response.hasOwnProperty('success')) {
           setIsConfirm(true);
+          props.changeConfirmStatus(true);
         }
         else if (response.hasOwnProperty('error')){
           alert(response.error);
@@ -63,7 +61,8 @@ const PixelDetail = (props) => {
     const m = minutes.toString().length === 1 ? '0' + minutes : minutes;
     const s = seconds.toString().length === 1 ? '0' + seconds : seconds;
     if (m+":"+s === "00:00") {
-      setIsTimeEnd(true);
+      setIsExpanded(false);
+      alert("Run out of time. Purchase failed.")
     }
     return m+":"+s
   }
@@ -102,7 +101,7 @@ const PixelDetail = (props) => {
                 <p><b>Seller address:</b> 0xA18E8f4d792Cde9B14E32593D1077Bc3237c6CE6</p>
                 <p>You have <b>15 minutes</b> to finish transaction.</p>
                 <p>Time remain: <b>{getTimeLeft(stopTime)}</b></p>
-                <Form type={'confirm'} id={currentPixel} setIsOpen={setIsExpanded}/>
+                <Form type={'confirm'} id={currentPixel} setIsOpen={setIsExpanded} changeBoughtStatus={props.changeBoughtStatus}/>
               </div>
             }
           </div>

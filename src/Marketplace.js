@@ -36,6 +36,13 @@ const Marketplace = (props) => {
     console.log('o',isOpen)
     if (isOpen && isConfirm) {
       alert("You will lose all the change you made if you close the popup.");
+      APIService.cleanPTB(currentPixel)
+      .then((response) => {
+        if (response.hasOwnProperty('success')) {
+          console.log(response)
+        }
+      })
+      .catch(error => console.log('error', error))
     }
     setIsOpen(!isOpen);
     setIsConfirm(false);
@@ -77,6 +84,10 @@ const Marketplace = (props) => {
     const seconds = Math.floor(stopTime % 60);
     const m = minutes.toString().length === 1 ? '0' + minutes : minutes;
     const s = seconds.toString().length === 1 ? '0' + seconds : seconds;
+    if (m+":"+s === "00:00") {
+      setIsOpen(false);
+      alert("Run out of time. Purchase failed.")
+    }
     return m+":"+s
   }
 

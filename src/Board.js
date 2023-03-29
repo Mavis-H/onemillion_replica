@@ -9,6 +9,10 @@ const Board = (props) => {
   const [currentPixels, setCurrentPixels] = useState([]);
   const [currentCursor, setCurrentCursor] = useState({x: -1, y: -1});
   const [currentInfo, setCurrentInfo] = useState(['','']);
+  const [currentPos, setCurrentPos] = useState(-1);
+  // Control alert when close popup after confirming purchase
+  const [isConfirm, setIsConfirm] = useState(false);
+  const [isBought, setIsBought] = useState(false);
 
   useEffect(() => {
     setCurrentImg(props.img);
@@ -71,6 +75,16 @@ const Board = (props) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const togglePopup = () => {
+    if (isOpen && isConfirm && !isBought) {
+      alert("You will lose all the change you made if you close the popup.");
+      APIService.cleanPTB(currentPos)
+      .then((response) => {
+        if (response.hasOwnProperty('success')) {
+          console.log(response)
+        }
+      })
+      .catch(error => console.log('error', error))
+    }
     setIsOpen(!isOpen);
   }
 
@@ -84,6 +98,9 @@ const Board = (props) => {
                 detailPixels={getDetailPixels()}
                 info={currentInfo}
                 logStatus={props.logStatus}
+                changeConfirmStatus={setIsConfirm}
+                changeBoughtStatus={setIsBought}
+                setCurrentPos={setCurrentPos}
               />
             </>}
             handleClose={togglePopup}

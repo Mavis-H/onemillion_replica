@@ -62,6 +62,7 @@ const Form = (props) => {
       .then((response) => {
         if (response.hasOwnProperty('success')) {
           props.setIsOpen(true);
+          props.changeBoughtStatus(true);
           alert("Your "+response.success+", you can now manage it on your account.");
         } else if (response.hasOwnProperty('error')){
           alert(response.error);

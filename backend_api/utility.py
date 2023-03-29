@@ -62,6 +62,19 @@ class CacheCleaner:
             for p in cleaning_ptb:
                 logger.info(f'cleaning ptb {p}')
                 del self.cache['pending_transaction_book'][p]
+    
+    def clean_position(self, position):
+        logger.info(f'cleaning cache at position {position}')
+        # Cleaning user terminated pending txn back to pixel_listing
+        if position in self.cache['pending_transaction_book']:
+            pending_txn = self.cache['pending_transaction_book'][position]
+            if pending_txn[3] != 'N/A':
+                # Put back to pixel_listing if bought from marketplace
+                self.cache['pixels_listing'][position] = (pending_txn[0], pending_txn[3], pending_txn[1])
+            del self.cache['pending_transaction_book'][position]
+            return True
+        else:
+            return False
 
 
 @retry('validate_txn', False, 1)

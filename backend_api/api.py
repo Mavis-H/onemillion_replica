@@ -146,6 +146,15 @@ def get_pending_transaction_book():
     return cache['pending_transaction_book']
 
 
+@app.route('/clean_ptb/<position>', methods=['GET'])
+@verbose_logger
+def clean_ptb(position: int):
+    if cache_cleaner.clean_position(int(position)):
+        return {'success': f'position {position} is cleaned from ptb'}
+    else:
+        return {'error': f'position {position} is not found in ptb'}
+
+
 @app.route('/request_purchase', methods=['POST'])
 @login_required
 @verbose_logger

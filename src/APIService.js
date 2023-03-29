@@ -58,6 +58,12 @@ export default class APIService{
             .catch(error => console.log(error))
     }
 
+    static cleanPTB(position){
+        return fetch(`/clean_ptb/${position}`)
+            .then(response => response.json())
+            .catch(error => console.log(error))
+    }
+
     static getCurrentUserInfo(){
         return fetch(`/get_user`)
             .then(response => response.json())
