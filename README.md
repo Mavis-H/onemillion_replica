@@ -1,43 +1,29 @@
-# CSE330
-
-## Approved by David Buckley
-## Siqian Hou
-## 502936
-## Mavis-H
-
 __Idea Comes From One Million Website__
 Link: http://www.milliondollarhomepage.com/
 
-#### Rubric turned in on time (5 points)
+#### Languages/Frameworks used
+- React.js
+- Flask
+- PostgreSQL
 
-#### Languages/Frameworks used (20 points)
-- 10: Learned/Used React.js frontend
-- 10: Learned/Used Flask backend
-- 0: MySQL Database => PostgreSQL Database
-
-#### Functionality (60 points)
-- 10: Users can register, login, and logout
-- 5: Logged in users can buy/sell a square area on the webpage.
-- 15: Users trasaction will be verified through Bitcoin transaction.
-- 15: Logged in users can set/edit the color and the brief description of their own areas. 
-- 5：Any user can check the description of squares. 
-- 10: Database contains Users and Squares with the necessary columns and column types to maintain the above functionality
-
-#### Best Practices (5 points)
-- Code is readable and well formatted
-- All pages pass the html validator
-
-#### Creative Portion (10 points)
-- User can also check detail square and surrounding suqares pattern on click
-- Data encoding & decoding, reduce bandwidth
-	- only transfer pixels owned by user, others set to default 
+#### Functionality
+- Users can register, log in, and log out.
+- Logged-in users can buy/sell pixels on the webpage.
+- User-owned pixels listed in the marketplace can be bought.
+- Any unowned pixels can be bought by clicking on the home page.
+- User transactions will be verified through Bitcoin transactiond.
+- Logged-in users can set/edit the color and the brief description of their own areas on the management page.
+- Users can sell and recall their pixels through the management page. 
+- Anyone can check the details of a square and its surrounding squares pattern by clicking.
+- Database contains Users and Pixels with the necessary columns and column types to maintain the above functionality.
+- Pixel data are encoded and decoded to reduce bandwidth.
 	- rgb => binary(24bits: 8 bits * 3) => base64(4 unicode char)
 
 
 __Basic Concept and Process Related to Cryptocurrency & Blockchain__
 
 #### Set up:
-- MHP: self create cryptocurrency
+- MHP: self-create cryptocurrency
 	- total tokens: 1000,000
 	- token address: 0x6E682420f84f06E2a4B69e162718225E3eE2aAEA
 	- test account 1 (mavis) address: 0x3CC637174D6362318fD24a6ae2F15462A58d4183
@@ -45,7 +31,7 @@ __Basic Concept and Process Related to Cryptocurrency & Blockchain__
 - On Görli Testnet & Binance Smart Chain(BSC)
 	- Using faucet on Görli Testnet (for test)
 	- Real money
-- Using metamask wallet (multi-accounts)
+- Using Metamask wallet (multi-accounts)
 - Import chain network & token
 
 #### Process:
@@ -53,17 +39,16 @@ __Basic Concept and Process Related to Cryptocurrency & Blockchain__
 
 - App provide seller address & move item from sell listing to pending transaction book(PTB)
 
-- Customer send certain MHP to seller address
+- Customer sends certain MHP to seller address
 
 - Customer upload transaction receipt hash(unique) inside 15 mins
 
-- Exceeding time will result in purchase failed
+- Exceeding time will result in purchasing failed
 
-- backend check transaction on chain blocks from fullnode(lightnode, archivenode)
+- Backend check transaction on chain blocks from fullnode(lightnode, archivenode)
 
 #### Other Settings:
 - utility.py: 
 	- is_dev = True: activate log; False: deactivate
 - consts.py: important value
-- test.py: insert large amount of test records
-- PTB is stored in cache because the state only last at most 15mins(time limit can be modified). PTB will be refreshed if server down (we assume the server will keep running).
+- PTB is stored in cache because the state only last at most 15mins(time limit can be modified). PTB will be refreshed if server is down (we assume the server will keep running). If a user terminates the purchase process before time runs out, the related transaction in PTB will be force cleared.
