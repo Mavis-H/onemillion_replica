@@ -10,6 +10,9 @@ ENDPOINT = 'https://eth-goerli.g.alchemy.com/v2/Dy3YnnKVgx3i6DM6WGPlY8kz5W8QpKb0
 WIDTH = 1000
 HEIGHT = 1000
 
+# yellow(254, 208, 73), mint(207, 253, 225), green(104, 185, 132), nature(61, 86, 86)
+INITIAL_COLOR_PALETTE = ['/tBJ', 'z/3h', 'aLmE', 'PVZW']
+
 # address for bsc mainnet
 # TOKEN_ADDRESS = '0x2e7472f8f3060df85302b535bcd84c6e0ffc8a7c'
 # 'https://sparkling-purple-forest.bsc.quiknode.pro/13a169e12450d00d2799491cd98a761b256381fe/

@@ -9,7 +9,7 @@ from dotenv import load_dotenv
 from .log import logger
 from .api_sql import db_get_user, db_exists_user, db_set_user, db_get_all_pixel, User, anon_user, db_user_have_pixel, \
     db_set_pixel, AnonymousUser, db_transfer_pixel, Pixel, db_get_all_pixel_listing, db_set_pixel_listing, \
-    db_delete_pixel_listing, db_buy_pixel
+    db_delete_pixel_listing, db_buy_pixel, db_insert_pixel_art
 from flask_login import LoginManager, login_required, logout_user, login_user, current_user
 from . import app
 from .utility import rgb_to_base64, CacheCleaner, validate_txn, verbose_logger
@@ -24,6 +24,9 @@ login_manager = LoginManager()
 login_manager.init_app(app)
 login_manager.login_view = 'login'
 login_manager.anonymous_user = AnonymousUser
+
+
+# db_insert_pixel_art()
 
 cache = {
     # Need to get this from data base

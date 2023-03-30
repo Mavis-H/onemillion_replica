@@ -1,4 +1,5 @@
 import base64
+import random
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import generate_password_hash, check_password_hash
 
@@ -186,6 +187,26 @@ def db_buy_pixel(new_owner: str, position: int) -> bool:
     db.session.add(Pixel(user=new_owner, position=position, rgb='AAAA', description=''))
     db.session.commit()
     logger.info(f'{new_owner} bought pixel from website at {position}')
+    return True
+
+
+@error_handle('insert_initial_pixel_art', False)
+def db_insert_pixel_art() -> bool:
+    logger.info("Initial pixel art is inserted to user mavis1.")
+    for g in range(0,5):
+        for i in range(g*200+0,g*200+20):
+            for j in range(20):
+                pos = i*1000 + j
+                for m in range(5):
+                    random_rgb = random.choice(consts.INITIAL_COLOR_PALETTE)
+                    db.session.add(Pixel(user="mavis1", position=pos+200*m, rgb=random_rgb, description=''))
+        for i in range(g*200+20,g*200+40):
+            for j in range(20,40):
+                pos = i*1000 + j
+                for m in range(5):
+                    random_rgb = random.choice(consts.INITIAL_COLOR_PALETTE)
+                    db.session.add(Pixel(user="mavis1", position=pos+200*m, rgb=random_rgb, description=''))
+    db.session.commit()
     return True
 
 
